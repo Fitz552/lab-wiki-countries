@@ -9,7 +9,7 @@ function CountryDetails(props) {
         let currentCountry = props.countries.filter(country=>{return cca3 === country.cca3})
         setCountry(currentCountry)
         setLoaded(true)
-    }, [cca3])
+    }, [props.countries, cca3])
 
     function searchName(cc3) {
         let currentCountry = props.countries.filter(country=>{return cc3 === country.cca3})
@@ -20,39 +20,41 @@ function CountryDetails(props) {
         
         <div className = "col">
             {loaded &&
-                <div>
-                <p className = "h1">
+                <div className = "container bg-light">
+                <p className = "h2 pb-3 border-bottom border-white">
                     {country[0].name.official}
                 </p>
-                <div className="row">
-                    <div className="col">
-                        <p>Capital</p>
+                <div className = "container bg-light">
+                    <div className="row border-bottom border-white">
+                        <div className="col-4">
+                            <p>Capital</p>
+                        </div>
+                        <div className="col">
+                            <p>{country[0].capital}</p>
+                        </div>
                     </div>
-                    <div className="col">
-                        <p>{country[0].capital}</p>
+                    <div className="row border-bottom border-white">
+                        <div className="col-4">
+                            <p>Area</p>
+                        </div>
+                        <div className="col border-bottom border-white">
+                            <p>{country[0].area} KM²</p>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col">
-                        <p>Area</p>
+                    <div className="row border-bottom border-light">
+                        <div className="col-4">
+                            <p>Borders</p>
+                        </div>
+                        <ul className="col">
+                            {country[0].borders.map(border => {
+                                return(
+                                    <li key={border}>
+                                        <Link className="nav-link text-info" to={`/${border}`}>{searchName(border)}</Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     </div>
-                    <div className="col">
-                        <p>{country[0].area} KM²</p>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col">
-                        <p>Borders</p>
-                    </div>
-                    <ul className="col">
-                        {country[0].borders.map(border => {
-                            return(
-                                <li key={border}>
-                                    <Link to={`/${border}`}>{searchName(border)}</Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
                 </div>
             </div>
         }

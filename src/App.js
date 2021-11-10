@@ -3,7 +3,6 @@ import countries from "./countries.json"
 import CountriesList from "./components/CountriesList";
 import { Routes, Route } from "react-router-dom"
 import CountryDetails from "./components/CountryDetails";
-import {useState} from "react"
 
 
 function App() {

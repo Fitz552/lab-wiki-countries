@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react"
-import {Link, NavLink} from "react-router-dom"
+import { useEffect, useState } from "react"
+import {NavLink} from "react-router-dom"
 
 
 function CountriesList (props) {
@@ -11,15 +11,16 @@ function CountriesList (props) {
     )
 
     return (
-        <div className = "col-4 m-2">
+        <ul className = "col-3 m-2 list-group overflow-auto" style={{maxHeight: "500px", overflow: "scroll"}}>
             {countries.map(country => {
                 return (
-                    <div className="col-2" key={country.cca3}>
-                        <NavLink to={`/${country.cca3}`} className={isActive=>"nav-link" + (!isActive ? " unselected" : "h1")}>{country.name.common}</NavLink>
-                    </div>
-                    )
+                    <li className="list-group-item list-group-item-action" key={country.cca3}>
+                        <NavLink to={`/${country.cca3}`} className="nav-link text-secondary">{country.name.common}</NavLink>
+                    </li>
+
+                )
             })}
-        </div>
+        </ul>
     )
 
 }
