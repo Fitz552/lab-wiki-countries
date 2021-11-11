@@ -3,12 +3,10 @@ import { useParams, Link} from 'react-router-dom'
 function CountryDetails(props) {
     const {cca3} = useParams();
     const [country, setCountry] = useState([]);
-    const [loaded, setLoaded] = useState(false)
 
     useEffect(()=> { 
         let currentCountry = props.countries.filter(country=>{return cca3 === country.cca3})
         setCountry(currentCountry)
-        setLoaded(true)
     }, [props.countries, cca3])
 
     function searchName(cc3) {
@@ -19,7 +17,9 @@ function CountryDetails(props) {
     return(
         
         <div className = "col">
-            {loaded &&
+        {console.log(props.countries)}
+        {console.log(country)}
+            {props.countries.length>0 && country.length>0?
                 <div className = "container bg-light">
                 <p className = "h2 pb-3 border-bottom border-white">
                     {country[0].name.official}
@@ -46,17 +46,17 @@ function CountryDetails(props) {
                             <p>Borders</p>
                         </div>
                         <ul className="col">
-                            {country[0].borders.map(border => {
+                            {country[0].borders ? country[0].borders.map(border => {
                                 return(
                                     <li key={border}>
                                         <Link className="nav-link text-info" to={`/${border}`}>{searchName(border)}</Link>
                                     </li>
                                 )
-                            })}
+                            }): <div></div>}
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> : <div></div>
         }
         </div>
     )

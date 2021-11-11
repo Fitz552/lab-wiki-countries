@@ -15,7 +15,7 @@ function CountriesList (props) {
             {countries.map(country => {
                 return (
                     <li className="list-group-item list-group-item-action" key={country.cca3}>
-                        <NavLink to={`/${country.cca3}`} className="nav-link text-secondary">{country.name.common}</NavLink>
+                        <NavLink end to={`/${country.cca3}`} className="nav-link text-secondary" activeClassName="nav-link text-white bg-info">{country.name.common}</NavLink>
                     </li>
 
                 )
